@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Mov : Being
+public class Player : Being
 {
     //inputs
     private float xMov;
@@ -16,22 +16,30 @@ public class Player_Mov : Being
     private float speed = 5000f;
     [SerializeField]
     private float JForce = 50f;
-    [SerializeField]
-    private float MAX_STAMINA = 18;
+    public float MAX_STAMINA = 18;
+    public float MAX_MANA = 10;
     private float respawn_time = 3f;
     public float stamina;
+    private float dStamina;
+     [SerializeField]  
+    private float count;
     private int dash;
     private float Stamina
     {
         get { return stamina; }
         set { stamina = value; }
     }
-
+    public float mana;
+    private float Mana{
+        get{return mana;}
+        set{mana = value;}
+    }
     private float smoth = 0.3f;
     //Bools Mov
     private bool CanMove = true;
     [SerializeField]
     private bool CanJump = true;
+    private bool rightF = true;
     //Components
     private Rigidbody2D RB2D;
     private Transform transform;
@@ -44,6 +52,7 @@ public class Player_Mov : Being
     // Start is called before the first frame update
     void Awake()
     {
+        count = 0;
         MAX_HEALTH = 45;
         RB2D = GetComponent<Rigidbody2D>();
         transform = GetComponent<Transform>();
@@ -55,6 +64,8 @@ public class Player_Mov : Being
         CanMove = true;
         health = MAX_HEALTH;
         Stamina = MAX_STAMINA;
+        mana = MAX_MANA;
+        dStamina = stamina;
         spawnpoint = transform.position;
         orient = transform.rotation;
     }
@@ -63,7 +74,6 @@ public class Player_Mov : Being
     void Update()
     {
         if (!PauseMenu.isPaused){
-            DontFall();
             dash = (Input.GetKey(KeyCode.LeftShift) && stamina > 0.1) ? 3 : 1;
             if (CanMove)
             {
@@ -76,6 +86,7 @@ public class Player_Mov : Being
     }
     void FixedUpdate()
     {
+        StaminaRegen();
         Walk(xMov * Time.fixedDeltaTime);
         Jump(jump);
         jump = false;
@@ -83,24 +94,17 @@ public class Player_Mov : Being
     }
     void animate()
     {
-        if (xMov > 0)
+        if (xMov != 0)
         {
-            //animate
-            if (spriteRender.flipX)
-            {
-                AttackPos.localPosition = new Vector3(-AttackPos.localPosition.x, AttackPos.localPosition.y, 0);
+            ///animate run
+            if(rightF && xMov < 0){
+                transform.Rotate(0f,180f,0f);
+                rightF = false;
             }
-            spriteRender.flipX = false;
-
-        }
-        else if (xMov < 0)
-        {
-            //animate
-            if (!spriteRender.flipX)
-            {
-                AttackPos.localPosition = new Vector3(-AttackPos.localPosition.x, AttackPos.localPosition.y, 0);
+            if(!rightF && xMov > 0){
+                transform.Rotate(0f,180f,0f);
+                rightF = true;
             }
-            spriteRender.flipX = true;
         }
         else
         {
@@ -143,7 +147,21 @@ public class Player_Mov : Being
     {
         CanMove = false;
         //animacion muerte
-        StartCoroutine(Respawn());
+        //Start all Coroutine(Respawn());
+    }
+    private void StaminaRegen(){
+        float dif = stamina - dStamina;
+        if(dif == 0){
+            count += Time.fixedDeltaTime;
+        }
+        else if(dif < 0){
+            count = 0;
+        }
+        if(count > 3f && stamina < MAX_STAMINA){
+            stamina += 0.1f;
+        }
+        
+        dStamina = stamina;
     }
 
     public override IEnumerator Respawn()

@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 17339313}
   - component: {fileID: 17339312}
   - component: {fileID: 17339315}
+  - component: {fileID: 17339316}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -292,6 +293,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MAX_HEALTH: 12
+--- !u!50 &17339316
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17339311}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &113758319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1533,6 +1561,7 @@ MonoBehaviour:
   area: 0.5
   SwordDMG: 1
   BulletDMG: 3
+  Bullet: {fileID: 8243046013734191352, guid: c6bcd72d95257264d91dfa7f33248394, type: 3}
   coolDown: 1
 --- !u!1 &1015455753
 GameObject:
@@ -2774,7 +2803,10 @@ MonoBehaviour:
   speed: 1000
   JForce: 20
   MAX_STAMINA: 18
+  MAX_MANA: 10
   stamina: 0
+  count: 0
+  mana: 0
   CanJump: 1
 --- !u!212 &1489157809
 SpriteRenderer:

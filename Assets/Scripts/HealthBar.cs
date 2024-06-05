@@ -15,11 +15,11 @@ public class HealthBar : MonoBehaviour
     }
     private void Start()
     {
-        setMaxHealth(Player.GetComponent<Player_Mov>().MAX_HEALTH);
+        setMaxHealth(Player.GetComponent<Player>().MAX_HEALTH);
     }
     private void FixedUpdate()
     {
-        setHealth(Player.GetComponent<Player_Mov>().GetHealth());
+        setHealth(Player.GetComponent<Player>().GetHealth());
 
     }
     public void setMaxHealth(int health)
