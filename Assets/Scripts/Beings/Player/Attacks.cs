@@ -33,11 +33,16 @@ public class Attacks : MonoBehaviour
     }
 
     private void Update() {
-        if(PM.GetCanMove()){
-            if(Input.GetKeyDown(KeyCode.Mouse0) && CanAttack && PM.stamina > swordCost){
-                SwordAttack();
-                if(Input.GetKey(KeyCode.Mouse1) && PM.stamina > bulletCost){
-                    BulletAttack();
+        if(!PauseMenu.isPaused){
+            if (PM.GetCanMove())
+            {
+                if (Input.GetKeyDown(KeyCode.Mouse0) && CanAttack && PM.stamina > swordCost)
+                {
+                    SwordAttack();
+                    if (Input.GetKey(KeyCode.Mouse1) && PM.stamina > bulletCost)
+                    {
+                        BulletAttack();
+                    }
                 }
             }
         }

@@ -62,17 +62,17 @@ public class Player_Mov : Being
     // Update is called once per frame
     void Update()
     {
-        DontFall();
-        dash = (Input.GetKey(KeyCode.LeftShift) && stamina > 0.1) ? 3 : 1;
-        if (CanMove)
-        {
-            xMov = Input.GetAxisRaw("Horizontal") * dash;
-            yMov = Input.GetButtonDown("Jump");
-            jump = yMov ? true : jump;
+        if (!PauseMenu.isPaused){
+            DontFall();
+            dash = (Input.GetKey(KeyCode.LeftShift) && stamina > 0.1) ? 3 : 1;
+            if (CanMove)
+            {
+                xMov = Input.GetAxisRaw("Horizontal") * dash;
+                yMov = Input.GetButtonDown("Jump");
+                jump = yMov ? true : jump;
+            }
+            animate();
         }
-
-        animate();
-
     }
     void FixedUpdate()
     {
