@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,7 @@ public class Player : Being
     private float dStamina;
      [SerializeField]  
     private float count;
-    private int dash;
+    private float dash;
     private float Stamina
     {
         get { return stamina; }
@@ -43,8 +44,7 @@ public class Player : Being
     //Components
     private Rigidbody2D RB2D;
     private Transform transform;
-    private SpriteRenderer spriteRender;
-    private Transform AttackPos;
+    private Animator animator;
 
 
 
@@ -56,8 +56,7 @@ public class Player : Being
         MAX_HEALTH = 45;
         RB2D = GetComponent<Rigidbody2D>();
         transform = GetComponent<Transform>();
-        spriteRender = GetComponent<SpriteRenderer>();
-        AttackPos = transform.GetChild(1);
+        animator = GetComponent<Animator>();
     }
     void Start()
     {
@@ -74,9 +73,17 @@ public class Player : Being
     void Update()
     {
         if (!PauseMenu.isPaused){
-            dash = (Input.GetKey(KeyCode.LeftShift) && stamina > 0.1) ? 3 : 1;
+           
             if (CanMove)
             {
+                if(CanJump && Input.GetKey(KeyCode.LeftShift) && stamina > 0.1){
+                    dash = 1.8f;
+                    animator.SetBool("Dashing", true);
+                }
+                else{
+                    dash = 1f;
+                    animator.SetBool("Dashing", false);
+                }
                 xMov = Input.GetAxisRaw("Horizontal") * dash;
                 yMov = Input.GetButtonDown("Jump");
                 jump = yMov ? true : jump;
@@ -96,7 +103,7 @@ public class Player : Being
     {
         if (xMov != 0)
         {
-            ///animate run
+            animator.SetBool("Walking", true);
             if(rightF && xMov < 0){
                 transform.Rotate(0f,180f,0f);
                 rightF = false;
@@ -108,15 +115,17 @@ public class Player : Being
         }
         else
         {
-            //animate Idle
+            animator.SetBool("Walking", false);
         }
+        animator.SetFloat("AirSpeedY",  MathF.Round(RB2D.velocity.y, 1, MidpointRounding.ToEven));
     }
     void Walk(float move)
     {
         Vector3 VObjective = new Vector2(move * speed, RB2D.velocity.y);
         RB2D.velocity = Vector3.SmoothDamp(RB2D.velocity, VObjective, ref velocity, smoth);
-        if (xMov != 0 && dash != 1)
+        if (xMov != 0 && dash != 1 && CanJump)
         {
+
             stamina -= 0.1f;
         }
 
@@ -145,8 +154,9 @@ public class Player : Being
     }
     private void Dead()
     {
+        RB2D.velocity = new Vector2(0,0);
         CanMove = false;
-        //animacion muerte
+        animator.SetBool("Dead", true);
         //Start all Coroutine(Respawn());
     }
     private void StaminaRegen(){
@@ -171,6 +181,7 @@ public class Player : Being
         health = MAX_HEALTH;
         stamina = MAX_STAMINA;
         CanMove = true;
+        animator.SetBool("Dead", false);
     }
     public bool GetCanMove()
     {

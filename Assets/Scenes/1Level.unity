@@ -958,7 +958,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.30755734, g: 0.28504804, b: 0.3207547, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1540,7 +1540,7 @@ Transform:
   m_GameObject: {fileID: 1015114160}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.59, y: 0.78, z: 0}
+  m_LocalPosition: {x: 0.64, y: 0.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1558,7 +1558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab576a5d3c202024b88267dc074ef669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  area: 0.5
+  area: 0.8
   SwordDMG: 1
   BulletDMG: 3
   Bullet: {fileID: 8243046013734191352, guid: c6bcd72d95257264d91dfa7f33248394, type: 3}
@@ -2780,6 +2780,7 @@ GameObject:
   - component: {fileID: 1489157808}
   - component: {fileID: 1489157814}
   - component: {fileID: 1489157813}
+  - component: {fileID: 1489157815}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2886,7 +2887,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!4 &1489157812
 Transform:
   m_ObjectHideFlags: 0
@@ -2984,6 +2985,27 @@ CapsuleCollider2D:
   m_Offset: {x: -0.1, y: 0.66}
   m_Size: {x: 0.78, y: 1.34}
   m_Direction: 0
+--- !u!95 &1489157815
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489157807}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c2a5b7097b0fe44394328c0bdb9252e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1679209662
 GameObject:
   m_ObjectHideFlags: 0
@@ -4245,9 +4267,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 635156314}
-  - {fileID: 1489157812}
   - {fileID: 1390532330}
   - {fileID: 17339314}
   - {fileID: 740308394}
   - {fileID: 113758322}
   - {fileID: 683230004}
+  - {fileID: 1489157812}

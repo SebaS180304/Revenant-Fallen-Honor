@@ -21,7 +21,7 @@ public class Attacks : MonoBehaviour
     private bool active = false;
     private void Awake() {
         CanAttack = true;
-        area = 0.5f;
+        area = 0.8f;
         SwordDMG = 2;
         BulletDMG = 1; 
         sword_cost = 2;
@@ -37,13 +37,14 @@ public class Attacks : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Mouse0) && CanAttack && PM.stamina > sword_cost){
                 SwordAttack();
                 if(Input.GetKey(KeyCode.Mouse1) && PM.mana > bullet_cost){
-                    BulletAttack();
+                    StartCoroutine(BulletAttack());
                 }
             }
         }
         }
     }
     private void SwordAttack(){
+        PM.GetComponent<Animator>().SetTrigger("Attack1");
         PM.stamina -= sword_cost;
         CanAttack = false;
         Collider2D[] objects = Physics2D.OverlapCircleAll(attackPosition.position, area);
@@ -56,8 +57,9 @@ public class Attacks : MonoBehaviour
         
         StartCoroutine(CoolDown());
     }
-    private void BulletAttack(){
+    private IEnumerator BulletAttack(){
         PM.mana -= bullet_cost;
+        yield return new WaitForSeconds(0.21f);
         GameObject B = Instantiate(Bullet, attackPosition.position, attackPosition.rotation);
         B.GetComponent<Trayectory>().setBulletDMG(BulletDMG);
 
@@ -71,9 +73,7 @@ public class Attacks : MonoBehaviour
         
     }
     private IEnumerator CoolDown(){
-        Debug.Log("Attacking");
         yield return new WaitForSeconds(coolDown);
         CanAttack = true;
-        Debug.Log("End");
     } 
 }
