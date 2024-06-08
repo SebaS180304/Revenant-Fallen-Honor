@@ -37,7 +37,7 @@ public class Player : Being
     }
     private float smoth = 0.3f;
     //Bools Mov
-    private bool CanMove = true;
+    public bool CanMove = true;
     [SerializeField]
     private bool CanJump = true;
     private bool rightF = true;
@@ -182,10 +182,6 @@ public class Player : Being
         stamina = MAX_STAMINA;
         CanMove = true;
         animator.SetBool("Dead", false);
-    }
-    public bool GetCanMove()
-    {
-        return CanMove;
     }
     public int  GetHealth()
     {
