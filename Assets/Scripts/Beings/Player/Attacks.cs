@@ -19,6 +19,7 @@ public class Attacks : MonoBehaviour
     //Limitadores
     private bool CanAttack;
     private bool active = false;
+    AudioManager audioManager;
     private void Awake() {
         CanAttack = true;
         area = 0.8f;
@@ -29,13 +30,15 @@ public class Attacks : MonoBehaviour
         attackPosition = GetComponent<Transform>();
         PM = transform.parent.GetComponent<Player>();
         active = true;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     private void Update() {
         if(!PauseMenu.isPaused){
             if(PM.CanMove){
             if(Input.GetKeyDown(KeyCode.Mouse0) && CanAttack && PM.stamina > sword_cost){
-                SwordAttack();
+                    audioManager.PlaySFX(audioManager.attacking);
+                    SwordAttack();
                 if(Input.GetKey(KeyCode.Mouse1) && PM.mana > bullet_cost){
                     StartCoroutine(BulletAttack());
                 }
@@ -50,6 +53,7 @@ public class Attacks : MonoBehaviour
         Collider2D[] objects = Physics2D.OverlapCircleAll(attackPosition.position, area);
         foreach(Collider2D object_ in objects){
             if(object_.CompareTag("Enemy")){
+                audioManager.PlaySFX(audioManager.hitting);
                 object_.GetComponent<Being>().GetHit(SwordDMG);
                 Debug.Log("Hit");
             }

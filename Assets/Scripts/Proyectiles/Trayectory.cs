@@ -8,9 +8,16 @@ public class Trayectory : MonoBehaviour
     private int speed;
     private int BulletDMG;
 
+    AudioManager audioManager;
+
+    private void Awake(){
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        audioManager.PlaySFX(audioManager.fireBall);
         transfrom = GetComponent<Transform>();
         speed = 2;
         StartCoroutine(AutoDestruction());

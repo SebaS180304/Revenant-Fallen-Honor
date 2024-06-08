@@ -17,7 +17,7 @@ public class HealthBar : MonoBehaviour
     {
         setMaxHealth(Player.GetComponent<Player>().MAX_HEALTH);
     }
-    private void FixedUpdate()
+    private void Update()
     {
         setHealth(Player.GetComponent<Player>().GetHealth());
 

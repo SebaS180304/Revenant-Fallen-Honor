@@ -45,10 +45,7 @@ public class Player : Being
     private Rigidbody2D RB2D;
     private Transform transform;
     private Animator animator;
-
-
-
-
+    AudioManager audioManager;
     // Start is called before the first frame update
     void Awake()
     {
@@ -57,6 +54,7 @@ public class Player : Being
         RB2D = GetComponent<Rigidbody2D>();
         transform = GetComponent<Transform>();
         animator = GetComponent<Animator>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
     void Start()
     {
@@ -72,8 +70,7 @@ public class Player : Being
     // Update is called once per frame
     void Update()
     {
-        if (!PauseMenu.isPaused){
-           
+        if (!PauseMenu.isPaused){  
             if (CanMove)
             {
                 if(CanJump && Input.GetKey(KeyCode.LeftShift) && stamina > 0.1){
@@ -135,12 +132,14 @@ public class Player : Being
         if (move && CanJump)
         {
             RB2D.velocity = new Vector2(RB2D.velocity.x, JForce);
+            audioManager.PlaySFX(audioManager.jumping);
         }
 
     }
 
     public void getHit(int DMG)
     {
+        audioManager.PlaySFX(audioManager.hitting);
         health -= DMG;
         if (health <= 0)
         {
@@ -154,6 +153,7 @@ public class Player : Being
     }
     private void Dead()
     {
+        audioManager.PlaySFX(audioManager.death);
         RB2D.velocity = new Vector2(0,0);
         CanMove = false;
         animator.SetBool("Dead", true);
