@@ -64,7 +64,6 @@ public class Player : Being
     {
         audioManager.PlaySFX(audioManager.death);
         control.CanMove = false;
-        control.xMov = 0f;
         animator.SetBool("Dead", true);
         //Start all Coroutine(Respawn());
     }

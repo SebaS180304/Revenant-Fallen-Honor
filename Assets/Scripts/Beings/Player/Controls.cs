@@ -6,7 +6,7 @@ using System;
 public class Controls : MonoBehaviour
 {
     //Inputs
-    public float xMov;
+    private float xMov;
     private bool yMov;
     private bool dashing;
     private bool jump; //Inter Value
@@ -48,7 +48,7 @@ public class Controls : MonoBehaviour
         if (!PauseMenu.isPaused){ 
             if (CanMove)
             {
-                attacking = Input.GetKeyDown(KeyCode.Mouse0);
+                attacking = Input.GetKey(KeyCode.Mouse0);
                 firing = Input.GetKey(KeyCode.Mouse1);
                 dashing = Input.GetKey(KeyCode.LeftShift);
                 xMov = Input.GetAxisRaw("Horizontal");
