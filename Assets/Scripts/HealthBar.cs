@@ -5,30 +5,49 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider;
-    public GameObject Player;
-
+    public Slider healthSlider;
+    public Slider easeHealthSlider;
+    private float lerpspeed = 0.005f;
+    private GameObject player;
     private void Awake()
     {
-        Player = GameObject.Find("Player");
+        player = GameObject.Find("Player");
 
     }
     private void Start()
     {
-        setMaxHealth(Player.GetComponent<Player>().MAX_HEALTH);
+        setMaxHealth(player.GetComponent<Player>().MAX_HEALTH);
     }
     private void Update()
     {
-        setHealth(Player.GetComponent<Player>().GetHealth());
-
+        if(player != null){
+            setHealth(player.GetComponent<Player>().GetHealth());
+            if (healthSlider.value != (player.GetComponent<Player>().GetHealth()))
+            {
+                healthSlider.value = (player.GetComponent<Player>().GetHealth());
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                player.GetComponent<Player>().getHit(5);
+            }
+            if (healthSlider.value != easeHealthSlider.value)
+            {
+                easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, player.GetComponent<Player>().GetHealth(), lerpspeed);
+            };
+        }
     }
+
     public void setMaxHealth(int health)
     {
-        slider.maxValue = health;
-        slider.value = health;
+        healthSlider.maxValue = health;
+        easeHealthSlider.maxValue = health;
+        healthSlider.value = health;
+        easeHealthSlider.value = health;
     }
+    
     public void setHealth(int health)
     {
-        slider.value = health;
+        healthSlider.value = health;
     }
 }
+
