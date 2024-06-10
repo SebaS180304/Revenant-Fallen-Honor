@@ -12,6 +12,7 @@ public class Being : MonoBehaviour
 
     public virtual void GetHit(int Damage)
     {
+
     }
 
     public void GetHealed(int Heal)
@@ -28,8 +29,9 @@ public class Being : MonoBehaviour
 
     public virtual IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(0f);
+        yield return new WaitForSeconds(0.1f);
     }
+
 
     public void DontFall()
     {

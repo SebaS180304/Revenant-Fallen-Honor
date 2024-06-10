@@ -49,13 +49,16 @@ public class Player : Being
         StaminaRegen();
     }
 
-    public void getHit(int DMG)
+    public override void GetHit(int DMG)
     {
         audioManager.PlaySFX(audioManager.hitting);
         health -= DMG;
+        
         if (health <= 0)
         {
             Dead();
+        }else{
+            animator.SetTrigger("Hurt");
         }
     }
 
@@ -63,9 +66,8 @@ public class Player : Being
     private void Dead()
     {
         audioManager.PlaySFX(audioManager.death);
-        control.CanMove = false;
         animator.SetBool("Dead", true);
-        //Start all Coroutine(Respawn());
+        StartCoroutine(Respawn());
     }
     private void StaminaRegen(){
         float dif = stamina - dStamina;
@@ -88,11 +90,12 @@ public class Player : Being
         transform.position = spawnpoint;
         health = MAX_HEALTH;
         stamina = MAX_STAMINA;
-        control.CanMove = true;
         animator.SetBool("Dead", false);
     }
     public int  GetHealth()
     {
         return health;
     }
+
+
 }

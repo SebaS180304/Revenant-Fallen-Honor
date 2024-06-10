@@ -17,6 +17,7 @@ public class Controls : MonoBehaviour
 
     //States
     private bool rightF;
+    
     public bool CanMove;
 
 
