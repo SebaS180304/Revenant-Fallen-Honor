@@ -10,7 +10,7 @@ public class Movement : MonoBehaviour
     //Constants
     private Vector3 velocity = Vector3.zero;
     [SerializeField]
-    private float speed = 5000f;
+    private float speed;
     [SerializeField]
     private float JForce = 50f;
     private float smoth = 0.2f;

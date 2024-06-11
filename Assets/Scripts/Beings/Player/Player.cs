@@ -23,8 +23,6 @@ public class Player : Being
     }
     //constants
     private Vector3 velocity = Vector3.zero;
-    //States
-    private bool inbulnerable;
 
     //Components
     private Transform transform;
@@ -111,11 +109,7 @@ public class Player : Being
         inbulnerable = false;
         animator.SetBool("Dead", false);
     }
-    private IEnumerator Inbulnerable(){
 
-        yield return new WaitForSeconds(0.6f);
-        inbulnerable = false;
-    }
 
     public void SetInbulnerable(bool state){
         inbulnerable = state;

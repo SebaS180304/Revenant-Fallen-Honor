@@ -10,18 +10,28 @@ public class Decision : MonoBehaviour
     private int point;
     private Transform player;
     private Transform objective;
-    private Transform transform;
     //Constants
-    private float MAX_DIST;
+    private float MAX_DIST = 4;
+    public Color attack;
+    public Color Idle;
 
     // States
     private bool coolDown;
+    private bool rightF;
+    //Components
+    private SpriteRenderer sp;
+    private Transform transform;
+    private Animator animator;
+
     private void Awake() {
         transform = GetComponent<Transform>();
+        sp = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
     void Start()
     {
         point = 1;
+        rightF = true;
     }
 
     // Update is called once per frame
@@ -29,19 +39,29 @@ public class Decision : MonoBehaviour
     {
         if(!coolDown){
             if(Vector2.Distance(transform.position,patrolPoints[point].position)> MAX_DIST ){
-            objective = patrolPoints[point];
+                animator.SetBool("InPatrol", true);
+                
+                objective = patrolPoints[point];
+                sp.color = Idle;
             }
             else if (player != null){
+                
+                animator.SetBool("InPatrol", false);
                 objective = player;
+                sp.color = attack;
             }
             else{
+                
+                animator.SetBool("InPatrol", true);
                 objective = patrolPoints[point];
+                sp.color = Idle;
             }
+            Turn();
             StartCoroutine(DecisionCD());
+            
 
         }
-        
-        
+                
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -61,13 +81,24 @@ public class Decision : MonoBehaviour
 
     public void setPoint(){
         point++;
-        if(point > patrolPoints.Length){
+        if(point >= patrolPoints.Length){
             point = 0;
         }
     }
     private IEnumerator DecisionCD(){
         coolDown = true;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.6f);
         coolDown = false;
+    }
+
+    private void Turn(){
+        if(rightF && (transform.position.x > objective.position.x)){
+            transform.Rotate(0f,180f,0f);
+            rightF = false;
+        }
+        if(!rightF && (transform.position.x < objective.position.x)){
+            transform.Rotate(0f,180f,0f);
+            rightF = true;
+        }
     }
 }

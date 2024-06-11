@@ -5,7 +5,7 @@ using UnityEngine;
 public class Trayectory : MonoBehaviour
 {
     private Transform transfrom;
-    private int speed;
+    private float speed;
     private int BulletDMG;
 
     AudioManager audioManager;
@@ -19,7 +19,7 @@ public class Trayectory : MonoBehaviour
     {
         audioManager.PlaySFX(audioManager.fireBall);
         transfrom = GetComponent<Transform>();
-        speed = 2;
+        speed = 0.5f;
         StartCoroutine(AutoDestruction());
         
     }
@@ -32,10 +32,10 @@ public class Trayectory : MonoBehaviour
     void FixedUpdate(){
 
     }
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnCollisionEnter2D(Collision2D other) {
         Debug.Log("Finded");
         if(other.gameObject.tag == "Enemy"){
-            other.gameObject.GetComponent<Being>().GetHit(BulletDMG, transfrom.position);
+            other.gameObject.GetComponent<Enemy>().GetHit(BulletDMG, transfrom.position);
             Debug.Log("Perforated");
             Destroy(gameObject);
         }

@@ -17,6 +17,7 @@ public class Enemy : Being
     }
     void Start()
     {
+        inbulnerable = false;
         spawnpoint  = transfrom.position;
         health  = MAX_HEALTH;
         DMG = 5;
@@ -26,7 +27,6 @@ public class Enemy : Being
     void Update()
     {
 
-        
     }
 
     
@@ -34,6 +34,28 @@ public class Enemy : Being
         if(other.gameObject.GetComponent<Player>() != null){
             other.gameObject.GetComponent<Player>().GetHit(DMG, transfrom.position);
         }
+    }
+
+    public override void GetHit(int DMG, Vector2 Pos){
+        Vector2 origin = transform.position;
+        Vector2 vectorU = (origin-Pos).normalized;
+        if(!inbulnerable){
+            health -= DMG;
+            if (health <= 0)
+            {
+                Dead();
+            }else{
+                //RB2D.AddForce(vectorU*50, ForceMode2D.Impulse);
+                StartCoroutine(Inbulnerable());
+            }
+            
+
+        }
+
+    }
+
+    private void Dead(){
+        GetComponent<Animator>().SetTrigger("Dead");
     }
 
 

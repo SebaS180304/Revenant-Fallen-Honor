@@ -46,9 +46,9 @@ public class Attacks : MonoBehaviour
             CanAttack = false;
             Collider2D[] objects = Physics2D.OverlapCircleAll(attackPosition.position, area);
             foreach(Collider2D object_ in objects){
-                if(object_.CompareTag("Enemy")){
+                if(object_.CompareTag("Enemy")&& !object_.isTrigger){
                     audioManager.PlaySFX(audioManager.hitting);
-                    object_.GetComponent<Being>().GetHit(SwordDMG, attackPosition.position);
+                    object_.GetComponent<Enemy>().GetHit(SwordDMG, attackPosition.position);
                 }
             }
             StartCoroutine(BulletAttack(fire));
