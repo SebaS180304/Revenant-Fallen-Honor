@@ -35,7 +35,7 @@ public class Trayectory : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         Debug.Log("Finded");
         if(other.gameObject.tag == "Enemy"){
-            other.gameObject.GetComponent<Being>().GetHit(BulletDMG);
+            other.gameObject.GetComponent<Being>().GetHit(BulletDMG, transfrom.position);
             Debug.Log("Perforated");
             Destroy(gameObject);
         }

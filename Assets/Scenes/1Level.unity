@@ -169,8 +169,8 @@ GameObject:
   - component: {fileID: 17339314}
   - component: {fileID: 17339313}
   - component: {fileID: 17339312}
-  - component: {fileID: 17339315}
-  - component: {fileID: 17339316}
+  - component: {fileID: 17339317}
+  - component: {fileID: 17339318}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -280,7 +280,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &17339315
+--- !u!114 &17339317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -289,11 +289,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 17339311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f0fe0452801da4a8e6f0ec0afcaef9, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c99b382353d4ee44a5ecc03d76d8cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAX_HEALTH: 0
---- !u!50 &17339316
+  MAX_HEALTH: 12
+--- !u!50 &17339318
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -304,11 +304,11 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 0.7853982
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -3585,7 +3585,6 @@ GameObject:
   - component: {fileID: 1489157812}
   - component: {fileID: 1489157810}
   - component: {fileID: 1489157809}
-  - component: {fileID: 1489157814}
   - component: {fileID: 1489157813}
   - component: {fileID: 1489157815}
   - component: {fileID: 1489157808}
@@ -3704,7 +3703,7 @@ Transform:
   m_GameObject: {fileID: 1489157807}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.41, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3757,41 +3756,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.85, y: 1.29}
   m_EdgeRadius: 0
---- !u!70 &1489157814
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489157807}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.1, y: 0.66}
-  m_Size: {x: 0.78, y: 1.34}
-  m_Direction: 0
 --- !u!95 &1489157815
 Animator:
   serializedVersion: 5
@@ -3825,7 +3789,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a246010c1b9bf004d888c5049af28643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xMov: 0
   CanMove: 0
 --- !u!114 &1489157817
 MonoBehaviour:

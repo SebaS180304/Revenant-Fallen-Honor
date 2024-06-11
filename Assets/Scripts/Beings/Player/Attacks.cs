@@ -48,7 +48,7 @@ public class Attacks : MonoBehaviour
             foreach(Collider2D object_ in objects){
                 if(object_.CompareTag("Enemy")){
                     audioManager.PlaySFX(audioManager.hitting);
-                    object_.GetComponent<Being>().GetHit(SwordDMG);
+                    object_.GetComponent<Being>().GetHit(SwordDMG, attackPosition.position);
                     Debug.Log("Hit");
                 }
             }

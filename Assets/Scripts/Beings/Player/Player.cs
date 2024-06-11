@@ -22,13 +22,18 @@ public class Player : Being
         set{mana = value;}
     }
 
+    //States
+    private bool inbulnerable;
+
     //Components
     private Transform transform;
     private AudioManager audioManager;
+    private Rigidbody2D RB2D;
     private Controls control;
     private Animator animator;
     void Awake()
     {
+        RB2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         count = 0;
         MAX_HEALTH = 45;
@@ -38,6 +43,7 @@ public class Player : Being
     }
     void Start()
     {
+        inbulnerable = false;
         health = MAX_HEALTH;
         Stamina = MAX_STAMINA;
         mana = MAX_MANA;
@@ -49,17 +55,26 @@ public class Player : Being
         StaminaRegen();
     }
 
-    public override void GetHit(int DMG)
+    public override void GetHit(int DMG, Vector2 direction)
     {
-        audioManager.PlaySFX(audioManager.hitting);
-        health -= DMG;
-        
-        if (health <= 0)
-        {
-            Dead();
-        }else{
-            animator.SetTrigger("Hurt");
+        Vector2 origin = transform.position;
+        Vector2 vectorU = (origin-direction).normalized;
+        if(! inbulnerable){
+            audioManager.PlaySFX(audioManager.hitting);
+            health -= DMG;
+            
+            if (health <= 0)
+            {
+                Dead();
+            }else{
+                RB2D.AddForce(vectorU*10, ForceMode2D.Impulse  );
+                animator.SetTrigger("Hurt");
+            }
+            StartCoroutine(Inbulnerable());
+
         }
+        
+        
     }
 
     
@@ -77,8 +92,8 @@ public class Player : Being
         else if(dif < 0){
             count = 0;
         }
-        if(count > 5f && stamina < MAX_STAMINA){
-            stamina += 0.1f;
+        if(count > 25f && stamina < MAX_STAMINA){
+            stamina += 0.5f * Time.fixedDeltaTime;
         }
         
         dStamina = stamina;
@@ -90,12 +105,18 @@ public class Player : Being
         transform.position = spawnpoint;
         health = MAX_HEALTH;
         stamina = MAX_STAMINA;
+        inbulnerable = false;
         animator.SetBool("Dead", false);
     }
-    public int  GetHealth()
-    {
-        return health;
+    private IEnumerator Inbulnerable(){
+        yield return new WaitForSeconds(1.5f);
+        inbulnerable = false;
     }
+
+    public void SetInbulnerable(bool state){
+        inbulnerable = state;
+    }
+    
 
 
 }

@@ -28,7 +28,7 @@ public class HealthBar : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                player.GetComponent<Player>().GetHit(5);
+                player.GetComponent<Player>().GetHit(5, new Vector2(0,0));
             }
             if (healthSlider.value != easeHealthSlider.value)
             {

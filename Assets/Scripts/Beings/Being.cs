@@ -8,9 +8,9 @@ public class Being : MonoBehaviour
     public int MAX_HEALTH;
     protected int health;
     protected Vector3 spawnpoint;
-    protected Quaternion orient;
 
-    public virtual void GetHit(int Damage)
+
+    public virtual void GetHit(int Damage, Vector2 direction)
     {
 
     }
@@ -33,8 +33,8 @@ public class Being : MonoBehaviour
     }
 
 
-    public void DontFall()
+    public int  GetHealth()
     {
-        gameObject.GetComponent<Transform>().rotation = orient;
+        return health;
     }
 }
