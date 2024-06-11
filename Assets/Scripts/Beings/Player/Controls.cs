@@ -55,7 +55,7 @@ public class Controls : MonoBehaviour
                 xMov = Input.GetAxisRaw("Horizontal");
                 yMov = Input.GetButtonDown("Jump");
                 //Al ser el tipo get keydown, y el update es mas rapido que el fixedUp, hace que reciba el input, pero no haga la accion al instante
-                //Por eso es que tiene que tener
+                //Por eso es que tiene que tener variebles intermedias
                 jump = yMov ? true : jump;
                 attack = attacking ? true : attack;
                 fire = firing ? true : fire;

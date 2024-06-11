@@ -49,12 +49,10 @@ public class Attacks : MonoBehaviour
                 if(object_.CompareTag("Enemy")){
                     audioManager.PlaySFX(audioManager.hitting);
                     object_.GetComponent<Being>().GetHit(SwordDMG, attackPosition.position);
-                    Debug.Log("Hit");
                 }
             }
             StartCoroutine(BulletAttack(fire));
             StartCoroutine(CoolDown());
-
         }
     }
     public IEnumerator BulletAttack(bool fire){

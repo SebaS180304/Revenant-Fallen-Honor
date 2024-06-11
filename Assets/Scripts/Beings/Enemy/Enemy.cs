@@ -29,11 +29,7 @@ public class Enemy : Being
         
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Player")){
-            //Trigger chase
-        }
-    }
+    
     private void OnCollisionStay2D(Collision2D other) {
         if(other.gameObject.GetComponent<Player>() != null){
             other.gameObject.GetComponent<Player>().GetHit(DMG, transfrom.position);
