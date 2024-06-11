@@ -21,7 +21,8 @@ public class Player : Being
         get{return mana;}
         set{mana = value;}
     }
-
+    //constants
+    private Vector3 velocity = Vector3.zero;
     //States
     private bool inbulnerable;
 
@@ -62,12 +63,11 @@ public class Player : Being
         if(! inbulnerable){
             audioManager.PlaySFX(audioManager.hitting);
             health -= DMG;
-            
             if (health <= 0)
             {
                 Dead();
             }else{
-                RB2D.AddForce(vectorU*10, ForceMode2D.Impulse  );
+                RB2D.AddForce(vectorU*100, ForceMode2D.Impulse  );
                 animator.SetTrigger("Hurt");
             }
             StartCoroutine(Inbulnerable());
@@ -82,6 +82,7 @@ public class Player : Being
     {
         audioManager.PlaySFX(audioManager.death);
         animator.SetBool("Dead", true);
+        RB2D.velocity = Vector3.SmoothDamp(RB2D.velocity, new Vector2(0,RB2D.velocity.y), ref velocity, 0.2f);
         StartCoroutine(Respawn());
     }
     private void StaminaRegen(){
@@ -92,7 +93,7 @@ public class Player : Being
         else if(dif < 0){
             count = 0;
         }
-        if(count > 25f && stamina < MAX_STAMINA){
+        if(count > 15f && stamina < MAX_STAMINA){
             stamina += 0.5f * Time.fixedDeltaTime;
         }
         
@@ -102,14 +103,17 @@ public class Player : Being
     public override IEnumerator Respawn()
     {
         yield return new WaitForSeconds(respawn_time);
+        RB2D.velocity = new Vector2(0,0);
         transform.position = spawnpoint;
         health = MAX_HEALTH;
         stamina = MAX_STAMINA;
+        mana = MAX_MANA;
         inbulnerable = false;
         animator.SetBool("Dead", false);
     }
     private IEnumerator Inbulnerable(){
-        yield return new WaitForSeconds(1.5f);
+
+        yield return new WaitForSeconds(0.6f);
         inbulnerable = false;
     }
 
