@@ -13,7 +13,7 @@ public class Enemy : Being
     void Awake(){
         RB2D = GetComponent<Rigidbody2D>();
         transfrom = GetComponent<Transform>();
-        MAX_HEALTH = 12;
+        MAX_HEALTH = 2;
     }
     void Start()
     {
