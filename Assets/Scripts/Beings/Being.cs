@@ -44,9 +44,9 @@ public class Being : MonoBehaviour
         return health;
     }
 
-    public IEnumerator Inbulnerable(){
+    public IEnumerator Inbulnerable(float time){
 
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(time);
         inbulnerable = false;
     }
 }

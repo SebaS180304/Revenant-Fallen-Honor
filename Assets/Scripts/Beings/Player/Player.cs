@@ -68,7 +68,7 @@ public class Player : Being
                 RB2D.AddForce(vectorU*100, ForceMode2D.Impulse  );
                 animator.SetTrigger("Hurt");
             }
-            StartCoroutine(Inbulnerable());
+            StartCoroutine(Inbulnerable(0.6f));
 
         }
         

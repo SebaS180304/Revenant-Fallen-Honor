@@ -43,10 +43,10 @@ public class Enemy : Being
             health -= DMG;
             if (health <= 0)
             {
-                Dead();
+                StartCoroutine(Dead());
             }else{
                 //RB2D.AddForce(vectorU*50, ForceMode2D.Impulse);
-                StartCoroutine(Inbulnerable());
+                StartCoroutine(Inbulnerable(0.1f));
             }
             
 
@@ -54,8 +54,10 @@ public class Enemy : Being
 
     }
 
-    private void Dead(){
+    private IEnumerator Dead(){
         GetComponent<Animator>().SetTrigger("Dead");
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
     }
 
 

@@ -11,7 +11,7 @@ public class Decision : MonoBehaviour
     private Transform player;
     private Transform objective;
     //Constants
-    private float MAX_DIST = 4;
+    private float MAX_DIST = 16;
     public Color attack;
     public Color Idle;
 
