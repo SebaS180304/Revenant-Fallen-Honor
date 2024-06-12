@@ -61,6 +61,9 @@ public class Controls : MonoBehaviour
                 fire = firing ? true : fire;
 
             }
+            else {
+                xMov = 0f;
+            }
         }
     }
 
