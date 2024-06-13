@@ -59,7 +59,7 @@ public class Player : Being
         Vector2 origin = transform.position;
         Vector2 vectorU = (origin-direction).normalized;
         if(! inbulnerable){
-            audioManager.PlaySFX(audioManager.hitting);
+            audioManager.PlaySFX(audioManager.hurt);
             health -= DMG;
             if (health <= 0)
             {
@@ -69,13 +69,9 @@ public class Player : Being
                 animator.SetTrigger("Hurt");
             }
             StartCoroutine(Inbulnerable(0.6f));
-
-        }
-        
-        
+        } 
     }
 
-    
     private void Dead()
     {
         audioManager.PlaySFX(audioManager.death);
@@ -83,6 +79,7 @@ public class Player : Being
         RB2D.velocity = Vector3.SmoothDamp(RB2D.velocity, new Vector2(0,RB2D.velocity.y), ref velocity, 0.2f);
         StartCoroutine(Respawn());
     }
+
     private void StaminaRegen(){
         float dif = stamina - dStamina;
         if(dif == 0){
@@ -108,13 +105,31 @@ public class Player : Being
         mana = MAX_MANA;
         inbulnerable = false;
         animator.SetBool("Dead", false);
+        audioManager.PlaySFX(audioManager.respawn);
     }
-
 
     public void SetInbulnerable(bool state){
         inbulnerable = state;
     }
     
+    private void OnTriggerEnter2D(Collider2D colision) {
+        if (colision.CompareTag("Health") && health < MAX_HEALTH){
+            HealthRegeneration(10);
+            audioManager.PlaySFX(audioManager.health);
+            colision.gameObject.SetActive(false);
+        }
+        else if (colision.CompareTag("Mana") && mana < MAX_MANA){
+            ManaRegeneration(4);
+            audioManager.PlaySFX(audioManager.mana);
+            colision.gameObject.SetActive(false);
+        }
+    }
 
+    private void HealthRegeneration(int amount){
+        health += amount;
+    }
 
+    private void ManaRegeneration(int amount){
+        mana += amount;
+    }
 }

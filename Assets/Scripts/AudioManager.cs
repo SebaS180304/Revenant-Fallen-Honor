@@ -18,6 +18,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip click;
     public AudioClip pause;
     public AudioClip unpause;
+    public AudioClip mana;
+    public AudioClip hurt;
+    public AudioClip health;
+    public AudioClip respawn;
 
     private void Start(){
         musicSource.clip = mainMusic;
