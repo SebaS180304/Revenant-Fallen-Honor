@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,8 +32,10 @@ public class Enemy : Being
 
     
     private void OnCollisionStay2D(Collision2D other) {
-        if(other.gameObject.GetComponent<Player>() != null){
+        try{
             other.gameObject.GetComponent<Player>().GetHit(DMG, transfrom.position);
+        }catch(Exception e){
+            Debug.Log("Choco");
         }
     }
 
