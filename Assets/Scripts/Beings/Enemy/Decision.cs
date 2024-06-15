@@ -64,19 +64,13 @@ public class Decision : MonoBehaviour
                 
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Player")){
-            player = other.gameObject.GetComponent<Transform>();
-        }
-    }
-    private void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Player")){
-            player = null;
-        }
-    }
+    
 
     public Transform getObjective(){
         return objective;
+    }
+    public void setPlayer(Transform ply){
+        player = ply;
     }
 
     public void setPoint(){

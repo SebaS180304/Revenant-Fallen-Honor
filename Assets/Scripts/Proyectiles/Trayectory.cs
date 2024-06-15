@@ -32,16 +32,17 @@ public class Trayectory : MonoBehaviour
     void FixedUpdate(){
 
     }
-    private void OnCollisionEnter2D(Collision2D other) {
-        Debug.Log("Finded");
+    private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Enemy"){
             other.gameObject.GetComponent<Enemy>().GetHit(BulletDMG, transfrom.position);
-            Debug.Log("Perforated");
             Destroy(gameObject);
         }
-        else if (other.gameObject.tag != "Player"){
+    }
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.tag != "Player" ){
 			Destroy(gameObject);
-		}
+        }
+
     }
     public void setBulletDMG(int DMG){
         BulletDMG = DMG;
@@ -50,4 +51,5 @@ public class Trayectory : MonoBehaviour
         yield return new WaitForSeconds(5f);
         Destroy(gameObject);
     }
+
 }
