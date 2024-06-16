@@ -8,12 +8,17 @@ public class Enemy : Being
     //Components
     private Rigidbody2D RB2D;
     private Transform transfrom;
+    private Animator animator;
+    //Vairiables
     private int spawnDist;
+    //Constants
     private int DMG;
+    
 
     void Awake(){
         RB2D = GetComponent<Rigidbody2D>();
         transfrom = GetComponent<Transform>();
+        animator = GetComponent<Animator>();
         MAX_HEALTH = 12;
     }
     void Start()
@@ -40,6 +45,7 @@ public class Enemy : Being
     }
 
     public override void GetHit(int DMG, Vector2 Pos){
+        
         Vector2 origin = transform.position;
         Vector2 vectorU = (origin-Pos).normalized;
         if(!inbulnerable){
@@ -48,7 +54,13 @@ public class Enemy : Being
             {
                 StartCoroutine(Dead());
             }else{
-                //RB2D.AddForce(vectorU*50, ForceMode2D.Impulse);
+
+                //Deactivate rb2d
+                RB2D.isKinematic = false;
+                RB2D.freezeRotation = true;
+                RB2D.gravityScale = 0f;
+                animator.SetTrigger("Hit");
+                RB2D.AddForce(vectorU*600, ForceMode2D.Impulse);
                 StartCoroutine(Inbulnerable(0.1f));
             }
             
