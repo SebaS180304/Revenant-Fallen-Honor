@@ -7,7 +7,7 @@ public class Trayectory : MonoBehaviour
     private Transform transfrom;
     private float speed;
     private int BulletDMG;
-    [SerializeField]
+    [SerializeField] private GameObject explosssion;
 
     AudioManager audioManager;
 
@@ -37,11 +37,13 @@ public class Trayectory : MonoBehaviour
         if(other.gameObject.tag == "Enemy"){
             other.gameObject.GetComponent<Enemy>().GetHit(BulletDMG, transfrom.position);
             Destroy(gameObject);
+            Instantiate(explosssion, transfrom.position, transfrom.rotation);
         }
     }
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.tag != "Player" ){
 			Destroy(gameObject);
+            Instantiate(explosssion, transfrom.position, transfrom.rotation);
         }
 
     }
