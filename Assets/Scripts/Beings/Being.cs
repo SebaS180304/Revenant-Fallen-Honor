@@ -14,7 +14,7 @@ public class Being : MonoBehaviour
     {
 
     }
-    public virtual void GetHit(int DMG){}
+    public virtual void GetHit(int Damage, Vector2 direction, int knockback){}
 
     public void GetHealed(int Heal)
     {

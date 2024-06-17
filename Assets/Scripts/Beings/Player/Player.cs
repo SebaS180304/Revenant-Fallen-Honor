@@ -64,7 +64,24 @@ public class Player : Being
             {
                 Dead();
             }else{
-                RB2D.AddForce(vectorU*100, ForceMode2D.Impulse  );
+                animator.SetTrigger("Hurt");
+            }
+            StartCoroutine(Inbulnerable(0.6f));
+        } 
+    }
+
+    public override void GetHit(int DMG, Vector2 direction, int knockback)
+    {
+        Vector2 origin = transform.position;
+        Vector2 vectorU = (origin-direction).normalized;
+        if(! inbulnerable){
+            audioManager.PlaySFX(audioManager.hurt);
+            health -= DMG;
+            if (health <= 0)
+            {
+                Dead();
+            }else{
+                RB2D.AddForce(vectorU*knockback, ForceMode2D.Impulse  );
                 animator.SetTrigger("Hurt");
             }
             StartCoroutine(Inbulnerable(0.6f));

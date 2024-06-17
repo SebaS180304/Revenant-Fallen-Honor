@@ -7,26 +7,31 @@ public class Enemy : Being
 {
     //Components
     private Rigidbody2D RB2D;
-    private Transform transfrom;
+    private Transform transform;
     private Animator animator;
+
     //Vairiables
     private int spawnDist;
     //Constants
     private int DMG;
+    private int contactForce;
     
 
     void Awake(){
+        
         RB2D = GetComponent<Rigidbody2D>();
-        transfrom = GetComponent<Transform>();
+        transform = GetComponent<Transform>();
         animator = GetComponent<Animator>();
         MAX_HEALTH = 12;
+
     }
     void Start()
     {
         inbulnerable = false;
-        spawnpoint  = transfrom.position;
+        spawnpoint  = transform.position;
         health  = MAX_HEALTH;
         DMG = 5;
+        contactForce = 25;
     }
 
     // Update is called once per frame
@@ -38,7 +43,7 @@ public class Enemy : Being
     
     private void OnCollisionStay2D(Collision2D other) {
         try{
-            other.gameObject.GetComponent<Player>().GetHit(DMG, transfrom.position);
+            other.gameObject.GetComponent<Player>().GetHit(DMG, transform.position,contactForce );
         }catch(Exception e){
             Debug.Log("Choco");
         }
@@ -56,9 +61,12 @@ public class Enemy : Being
             }else{
 
                 //Deactivate rb2d
-                RB2D.isKinematic = false;
-                RB2D.freezeRotation = true;
-                RB2D.gravityScale = 0f;
+                if(RB2D.isKinematic){
+                    RB2D.isKinematic = false;
+                    RB2D.freezeRotation = true;
+                    RB2D.gravityScale = 0f;
+                }
+                
                 animator.SetTrigger("Hit");
                 RB2D.AddForce(vectorU*600, ForceMode2D.Impulse);
                 StartCoroutine(Inbulnerable(0.1f));
@@ -73,6 +81,9 @@ public class Enemy : Being
         GetComponent<Animator>().SetTrigger("Dead");
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
+    }
+    public int getDMG(){
+        return DMG;
     }
 
 

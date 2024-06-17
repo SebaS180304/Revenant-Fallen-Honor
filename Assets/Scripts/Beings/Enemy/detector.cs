@@ -5,7 +5,7 @@ using UnityEngine;
 public class detector : MonoBehaviour
 {
     // Start is called before the first frame update
-    Decision enemy;
+    private Decision enemy;
     void Start()
     {
         enemy = GetComponentInParent<Decision>();
@@ -20,7 +20,6 @@ public class detector : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player")){
             enemy.setPlayer(other.gameObject.GetComponent<Transform>());
-            Debug.Log(enemy.getObjective());
         }
     }
     private void OnTriggerExit2D(Collider2D other) {
