@@ -9,8 +9,7 @@ public class Being : MonoBehaviour
     protected int health;
     protected bool inbulnerable;
     protected Vector3 spawnpoint;
-
-
+    protected AudioManager audioManager;
     public virtual void GetHit(int Damage, Vector2 direction)
     {
 
@@ -19,6 +18,7 @@ public class Being : MonoBehaviour
 
     public void GetHealed(int Heal)
     {
+        audioManager.PlaySFX(audioManager.health);
         if (health + Heal > MAX_HEALTH)
         {
             health = MAX_HEALTH;

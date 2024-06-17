@@ -26,7 +26,6 @@ public class Player : Being
 
     //Components
     private Transform transform;
-    private AudioManager audioManager;
     private Rigidbody2D RB2D;
     private Controls control;
     private Animator animator;
@@ -111,25 +110,17 @@ public class Player : Being
     public void SetInbulnerable(bool state){
         inbulnerable = state;
     }
-    
-    private void OnTriggerEnter2D(Collider2D colision) {
-        if (colision.CompareTag("Health") && health < MAX_HEALTH){
-            HealthRegeneration(10);
-            audioManager.PlaySFX(audioManager.health);
-            colision.gameObject.SetActive(false);
-        }
-        else if (colision.CompareTag("Mana") && mana < MAX_MANA){
-            ManaRegeneration(4);
-            audioManager.PlaySFX(audioManager.mana);
-            colision.gameObject.SetActive(false);
-        }
-    }
 
-    private void HealthRegeneration(int amount){
-        health += amount;
-    }
-
-    private void ManaRegeneration(int amount){
-        mana += amount;
+    public void GetManaed(int manaed)
+    {
+        audioManager.PlaySFX(audioManager.mana);
+        if (mana + manaed > MAX_MANA)
+        {
+            mana = MAX_MANA;
+        }
+        else
+        {
+            mana += manaed;
+        }
     }
 }

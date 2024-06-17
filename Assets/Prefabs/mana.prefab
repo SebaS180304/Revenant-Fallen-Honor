@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2871092088125709984}
   - component: {fileID: 5665188448417542519}
   - component: {fileID: 4284068611185903524}
+  - component: {fileID: 6358413446764406065}
   m_Layer: 0
   m_Name: mana
   m_TagString: Mana
@@ -120,3 +121,17 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.7611586}
   serializedVersion: 2
   m_Radius: 4.954352
+--- !u!114 &6358413446764406065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9114682214514488697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b49669b0095e64bb5408a5cf9a0cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 9114682214514488697}
+  player: {fileID: 0}
