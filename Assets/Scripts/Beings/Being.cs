@@ -6,6 +6,7 @@ public class Being : MonoBehaviour
 {
     [SerializeField]
     public int MAX_HEALTH;
+    [SerializeField]
     protected int health;
     protected bool inbulnerable;
     protected Vector3 spawnpoint;
@@ -27,16 +28,7 @@ public class Being : MonoBehaviour
         {
             health += Heal;
         }
-    }
-
-    public virtual IEnumerator Respawn()
-    {
-        yield return new WaitForSeconds(0.1f);
-        if(GetComponent<Animator>() != null){
-             GetComponent<Animator>().SetBool("Dead", false);
-        }
-       
-    }
+    } 
 
 
     public int  GetHealth()

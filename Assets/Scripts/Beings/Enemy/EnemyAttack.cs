@@ -8,15 +8,16 @@ public class EnemyAttack : MonoBehaviour
     // Start is called before the first frame update
     private Enemy enemy;
     private Transform transform;
+    [SerializeField]
     private int DMG;
     private int AttackForce;
     private void Awake() {
         enemy = GetComponentInParent<Enemy>();
         transform = GetComponentInParent<Transform>();    
-        DMG = enemy.getDMG();
+        
     }
     void Start()
-    {
+    {   DMG = enemy.getDMG();
         AttackForce = 100;
     }
 

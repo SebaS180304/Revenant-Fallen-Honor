@@ -10,6 +10,7 @@ public class Enemy : Being
     private Transform transform;
     private Animator animator;
 
+
     //Vairiables
     private int spawnDist;
     //Constants
@@ -32,6 +33,7 @@ public class Enemy : Being
         health  = MAX_HEALTH;
         DMG = 5;
         contactForce = 25;
+
     }
 
     // Update is called once per frame
@@ -86,5 +88,8 @@ public class Enemy : Being
         return DMG;
     }
 
-
+    public void Respawn(){
+        transform.position = spawnpoint;
+        health = MAX_HEALTH;
+    }
 }

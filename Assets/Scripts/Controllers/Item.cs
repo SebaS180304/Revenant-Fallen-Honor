@@ -12,11 +12,11 @@ public class Item : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Player") && item.CompareTag("Health")){
             player.GetComponent<Player>().GetHealed(15);
-            Destroy(item);
+            gameObject.SetActive(false);
         }
         else if (collision.CompareTag("Player") && item.CompareTag("Mana")){
             player.GetComponent<Player>().GetManaed(4);
-            Destroy(item);
+            gameObject.SetActive(false);
         }
     }
 }

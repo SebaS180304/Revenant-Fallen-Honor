@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,10 @@ public class Player : Being
     private Rigidbody2D RB2D;
     private Controls control;
     private Animator animator;
+
+
+    //Evento
+    public event EventHandler onDead;
     void Awake()
     {
         RB2D = GetComponent<Rigidbody2D>();
@@ -55,8 +60,7 @@ public class Player : Being
 
     public override void GetHit(int DMG, Vector2 direction)
     {
-        Vector2 origin = transform.position;
-        Vector2 vectorU = (origin-direction).normalized;
+        
         if(! inbulnerable){
             audioManager.PlaySFX(audioManager.hurt);
             health -= DMG;
@@ -92,7 +96,6 @@ public class Player : Being
     {
         audioManager.PlaySFX(audioManager.death);
         animator.SetBool("Dead", true);
-        RB2D.velocity = Vector3.SmoothDamp(RB2D.velocity, new Vector2(0,RB2D.velocity.y), ref velocity, 0.2f);
         StartCoroutine(Respawn());
     }
 
@@ -111,9 +114,10 @@ public class Player : Being
         dStamina = stamina;
     }
 
-    public override IEnumerator Respawn()
+    public IEnumerator Respawn()
     {
         yield return new WaitForSeconds(respawn_time);
+        onDead?.Invoke(this, EventArgs.Empty);
         RB2D.velocity = new Vector2(0,0);
         transform.position = spawnpoint;
         health = MAX_HEALTH;
