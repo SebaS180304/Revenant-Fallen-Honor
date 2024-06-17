@@ -2826,7 +2826,7 @@ GameObject:
   - component: {fileID: 896313307}
   - component: {fileID: 896313309}
   - component: {fileID: 896313308}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground1_1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5463,6 +5463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 300
   JForce: 12
+  CanJump: 0
 --- !u!61 &1489157818
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5554,7 +5555,7 @@ GameObject:
   - component: {fileID: 1649672762}
   - component: {fileID: 1649672764}
   - component: {fileID: 1649672763}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7245,6 +7246,7 @@ GameObject:
   - component: {fileID: 2043740261}
   - component: {fileID: 2043740263}
   - component: {fileID: 2043740262}
+  - component: {fileID: 2043740264}
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -7299,7 +7301,7 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.09, y: -0.94}
+  m_Offset: {x: -0.09, y: -1.01}
   m_Size: {x: 1.14, y: 0.18}
   m_Direction: 1
 --- !u!114 &2043740263
@@ -7314,6 +7316,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3c36b802ce3dc49ba048d7b3f12ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &2043740264
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043740260}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &2056092389
 GameObject:
   m_ObjectHideFlags: 0

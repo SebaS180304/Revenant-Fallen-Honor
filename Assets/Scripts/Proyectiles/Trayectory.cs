@@ -7,6 +7,7 @@ public class Trayectory : MonoBehaviour
     private Transform transfrom;
     private float speed;
     private int BulletDMG;
+    [SerializeField]
 
     AudioManager audioManager;
 

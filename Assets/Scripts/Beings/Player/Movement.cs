@@ -16,6 +16,7 @@ public class Movement : MonoBehaviour
     private float smoth = 0.2f;
 
     //status
+    [SerializeField]
     private bool CanJump;
 
     //Components

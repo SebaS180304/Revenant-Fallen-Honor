@@ -14,6 +14,13 @@ public class GroundControl : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D other) {
+        if(other.gameObject.layer == 3){
+            transform.parent.GetComponent<Movement>().Grounded(true);
+            transform.parent.GetComponent<Animator>().SetBool("Grounded", true);
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.layer == 3){
             transform.parent.GetComponent<Movement>().Grounded(false);
