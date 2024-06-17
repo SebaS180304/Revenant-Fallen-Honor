@@ -7061,7 +7061,7 @@ Transform:
   m_GameObject: {fileID: 1015114160}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.86, y: 1.93, z: 0}
+  m_LocalPosition: {x: 0.675, y: 0.985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7083,7 +7083,7 @@ MonoBehaviour:
   SwordDMG: 1
   BulletDMG: 3
   Bullet: {fileID: 8243046013734191352, guid: c6bcd72d95257264d91dfa7f33248394, type: 3}
-  coolDown: 2
+  coolDown: 0.5
 --- !u!1 &1015455753
 GameObject:
   m_ObjectHideFlags: 0
