@@ -16,8 +16,8 @@ public class Activate : MonoBehaviour
         if(enemys == null){
             enemys = GameObject.FindGameObjectsWithTag("Enemy");
         }
-        if(enemys == items){
-            enemys = GameObject.FindGameObjectsWithTag("item");
+        if(items == null){
+            items = GameObject.FindGameObjectsWithTag("item");
         }
     }
     void Start()
@@ -36,10 +36,8 @@ public class Activate : MonoBehaviour
             enemy.SetActive(true);
             enemy.GetComponent<Enemy>().Respawn();
         }
-        if (items != null){
-            foreach(GameObject item in items){
-            item.SetActive(true);
-        }
+        foreach(GameObject item in items){
+        item.SetActive(true);
         }
         
     }

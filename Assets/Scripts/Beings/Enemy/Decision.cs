@@ -12,20 +12,18 @@ public class Decision : MonoBehaviour
     private Transform objective;
     //Constants
     private float MAX_DIST = 16;
-    public Color attack;
-    public Color Idle;
 
     // States
     private bool coolDown;
     private bool rightF;
     //Components
-    private SpriteRenderer sp;
+
     private Transform transform;
     private Animator animator;
 
     private void Awake() {
         transform = GetComponent<Transform>();
-        sp = GetComponent<SpriteRenderer>();
+
         animator = GetComponent<Animator>();
     }
     void Start()
@@ -42,19 +40,18 @@ public class Decision : MonoBehaviour
                 animator.SetBool("InPatrol", true);
                 
                 objective = patrolPoints[point];
-                sp.color = Idle;
+
             }
             else if (player != null){
                 
                 animator.SetBool("InPatrol", false);
                 objective = player;
-                sp.color = attack;
+
             }
             else{
                 
                 animator.SetBool("InPatrol", true);
                 objective = patrolPoints[point];
-                sp.color = Idle;
             }
             Turn();
             StartCoroutine(DecisionCD());

@@ -6,8 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Audio
-  - Health
+  - item
   - Mana
+  - Health
   layers:
   - Default
   - TransparentFX
