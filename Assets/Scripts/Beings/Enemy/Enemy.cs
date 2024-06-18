@@ -65,7 +65,6 @@ public class Enemy : Being
             health -= DMG;
             if (health <= 0)
             {
-                score.AddScore(addedScore);
                 StartCoroutine(Dead());
             }
             else{
@@ -96,7 +95,7 @@ public class Enemy : Being
     }
 
     private IEnumerator Dead(){
-
+        score.AddScore(addedScore);
         Instantiate(HealthPotion, transform.position, transform.rotation);
         GetComponent<Animator>().SetTrigger("Dead");
         animator.SetTrigger("Dead");

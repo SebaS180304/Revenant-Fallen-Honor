@@ -113,7 +113,7 @@ public class Boss : MonoBehaviour
     }
     public void Reset()
     {
-        player = null;
+
         transform.position = enemy.spawnpoint;
     }
 
