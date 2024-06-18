@@ -9,6 +9,7 @@ TagManager:
   - item
   - Mana
   - Health
+  - Boss
   layers:
   - Default
   - TransparentFX
