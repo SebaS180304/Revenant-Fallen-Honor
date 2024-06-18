@@ -9,16 +9,14 @@ public class Enemy : Being
     private Rigidbody2D RB2D;
     private Transform transform;
     private Animator animator;
-
+    [SerializeField] private ScoreCountController score;
 
     //Vairiables
     private int spawnDist;
+    [SerializeField] private int addedScore;
     //Constants
     private int DMG;
     private int contactForce;
-
-    private ScoreCountController score;
-    
 
     void Awake(){
         
@@ -66,6 +64,7 @@ public class Enemy : Being
             health -= DMG;
             if (health <= 0)
             {
+                score.AddScore(addedScore);
                 StartCoroutine(Dead());
             }
             else{

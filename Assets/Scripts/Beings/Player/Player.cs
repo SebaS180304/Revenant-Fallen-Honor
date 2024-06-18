@@ -30,7 +30,8 @@ public class Player : Being
     private Rigidbody2D RB2D;
     private Controls control;
     private Animator animator;
-    private ScoreCountController score;
+    [SerializeField] private ScoreCountController score;
+    [SerializeField] private int addedScore;
 
     //Evento
     public event EventHandler onDead;
@@ -66,6 +67,7 @@ public class Player : Being
             health -= DMG;
             if (health <= 0)
             {
+                score.AddScore(addedScore);
                 Dead();
             }else{
                 animator.SetTrigger("Hurt");

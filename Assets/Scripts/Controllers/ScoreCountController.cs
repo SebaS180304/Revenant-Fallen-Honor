@@ -1,28 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.UI;
-using UnityEngine.UI;
+using TMPro;
 
 public class ScoreCountController : MonoBehaviour
 {
-    [SerializeField] Text ScoreText;
     private int score;
+    private TextMeshProUGUI scoreText;
 
-    void Start()
-    {
-        score = 0;
-    }
-    void Update()
-    {
-        UpdateScore();
+    private void Start() {
+        scoreText = GetComponent<TextMeshProUGUI>();
     }
 
-    public void AddScore(int newScore){
-        score += newScore;
+    private void Update() {
+        scoreText.text = score.ToString("0");
     }
 
-    public void UpdateScore(){
-        ScoreText.text = "Score: " + score;
+    public void AddScore(int addscore){
+        score += addscore;
     }
 }
