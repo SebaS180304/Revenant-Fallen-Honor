@@ -102,7 +102,7 @@ public class Player : Being
     private void StaminaRegen(){
         float dif = stamina - dStamina;
         if(dif == 0){
-            count += Time.fixedDeltaTime;
+            count += Time.deltaTime;
         }
         else if(dif < 0){
             count = 0;

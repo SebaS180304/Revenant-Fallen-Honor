@@ -8,6 +8,7 @@ public class Activate : MonoBehaviour
     // Start is called before the first frame update
     private GameObject[] enemys;
     private GameObject[] items;
+    private GameObject boss;
     private Player player;
 
     private void Awake() {
@@ -19,6 +20,7 @@ public class Activate : MonoBehaviour
         if(items == null){
             items = GameObject.FindGameObjectsWithTag("item");
         }
+        boss =  GameObject.Find("Boss");
     }
     void Start()
     {
@@ -39,6 +41,7 @@ public class Activate : MonoBehaviour
         foreach(GameObject item in items){
         item.SetActive(true);
         }
+        boss.GetComponent<Boss>().Reset();
         
     }
 }

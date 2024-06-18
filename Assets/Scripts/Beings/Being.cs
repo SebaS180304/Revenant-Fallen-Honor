@@ -9,7 +9,7 @@ public class Being : MonoBehaviour
     [SerializeField]
     protected int health;
     protected bool inbulnerable;
-    protected Vector3 spawnpoint;
+    public Vector3 spawnpoint;
     protected AudioManager audioManager;
     public virtual void GetHit(int Damage, Vector2 direction)
     {

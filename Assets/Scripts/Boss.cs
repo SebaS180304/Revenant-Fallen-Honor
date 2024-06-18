@@ -15,6 +15,11 @@ public class Boss : MonoBehaviour
     private Transform transform;
     private Animator animator;
     private Rigidbody2D rb2d;
+    private Enemy enemy;
+    //Event
+    public event EventHandler OnFire;
+
+
     
     // Start is called before the first frame updat
 
@@ -25,18 +30,12 @@ public class Boss : MonoBehaviour
         transform = GetComponent<Transform>();
         animator = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        enemy = GetComponent<Enemy>();
+        enemy.spawnpoint = transform.position;
     }
     void Update()
     {
-        if(player != null){
-            objective = player.GetComponent<Transform>();
-            if(Math.Abs(getDist())> MAX_DIST ){
-                animator.SetInteger("State", -1);
-            }else{
-                animator.SetInteger("State", 1);
-            }
-        }
-        else{
+        if(player == null){
             animator.SetInteger("State", 2);
         }
 
@@ -63,4 +62,39 @@ public class Boss : MonoBehaviour
             rightF = true;
         }
     }
+    public void ActuOption(){
+        if(player != null){
+            objective = player.GetComponent<Transform>();
+            if(Math.Abs(getDist())> MAX_DIST ){
+                animator.SetInteger("State", -1);
+            }else{
+                animator.SetInteger("State", 1);
+                OnFire?.Invoke(this,EventArgs.Empty);
+            }
+        }
+    }
+
+    public void CountDown(){
+        StartCoroutine(DecicionCoolDown());
+    }
+    private IEnumerator DecicionCoolDown(){
+        yield return new WaitForSeconds(5f);
+        ActuOption();
+    }
+
+    public void EndFireCountDown(){
+        StartCoroutine(FireCountDowwn());
+    }
+
+    private IEnumerator FireCountDowwn(){
+        yield return new WaitForSeconds(3f);
+        animator.SetBool("EndFire", true);
+        OnFire?.Invoke(this,EventArgs.Empty);
+    } 
+    public void Reset(){
+        player = null;
+        transform.position = enemy.spawnpoint;
+    }
+    
+
 }

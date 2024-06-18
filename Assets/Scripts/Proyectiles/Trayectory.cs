@@ -34,10 +34,15 @@ public class Trayectory : MonoBehaviour
 
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag == "Enemy"){
+        if(other.gameObject.tag == "Enemy" ){
             other.gameObject.GetComponent<Enemy>().GetHit(BulletDMG, transfrom.position);
             Destroy(gameObject);
             Instantiate(explosssion, transfrom.position, transfrom.rotation);
+        }
+        else if(other.gameObject.tag == "Boss"){
+            other.gameObject.GetComponent<Enemy>().GetHit(BulletDMG, transfrom.position, 2);
+            Instantiate(explosssion, transfrom.position, transfrom.rotation);
+            Destroy(gameObject);
         }
     }
     private void OnCollisionEnter2D(Collision2D other) {
@@ -52,6 +57,7 @@ public class Trayectory : MonoBehaviour
     }
     private IEnumerator AutoDestruction(){
         yield return new WaitForSeconds(5f);
+        Instantiate(explosssion, transfrom.position, transfrom.rotation);
         Destroy(gameObject);
     }
 

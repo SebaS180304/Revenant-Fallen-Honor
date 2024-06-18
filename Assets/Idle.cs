@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fall : StateMachineBehaviour
+public class Idle : StateMachineBehaviour
 {
-    private Rigidbody2D rb2d;
+    private Boss boss;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rb2d = animator.GetComponent<Rigidbody2D>();
-        rb2d.gravityScale = 15f;
+        boss = animator.GetComponent<Boss>();
+        boss.count = 0;
+        animator.GetComponent<Animator>().SetInteger("State", 2);
+        animator.GetComponent<Animator>().SetBool("EndFire", false);
+        boss.CountDown();
     }
-
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -19,11 +21,10 @@ public class Fall : StateMachineBehaviour
     //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-    rb2d.velocity = new Vector2(0,0);
-    rb2d.isKinematic = true;
-    }
+    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -36,4 +37,6 @@ public class Fall : StateMachineBehaviour
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
+
+    
 }
