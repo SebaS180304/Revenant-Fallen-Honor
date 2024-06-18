@@ -54,33 +54,29 @@ public class Enemy : Being
         
         Vector2 origin = transform.position;
         Vector2 vectorU = (origin-Pos).normalized;
-<<<<<<< Updated upstream
+
         health -= DMG;
         if (health <= 0)
         {
             StartCoroutine(Dead());
-        }else{
-=======
+        }
+        else{
             health -= DMG;
             if (health <= 0)
             {
                 StartCoroutine(Dead());
-            }else{
->>>>>>> Stashed changes
-
-            //Deactivate rb2d
-            if(RB2D.isKinematic){
-                RB2D.isKinematic = false;
-                RB2D.freezeRotation = true;
-                RB2D.gravityScale = 0f;
-                RB2D.AddForce(vectorU*600, ForceMode2D.Impulse);
-<<<<<<< Updated upstream
             }
-            animator.SetTrigger("Hit");
-        
+            else{
+                //Deactivate rb2d
+                if(RB2D.isKinematic){
+                    RB2D.isKinematic = false;
+                    RB2D.freezeRotation = true;
+                    RB2D.gravityScale = 0f;
+                    RB2D.AddForce(vectorU*600, ForceMode2D.Impulse);
 
-=======
->>>>>>> Stashed changes
+                }
+                animator.SetTrigger("Hit");
+            }
         }
 
     }
@@ -98,12 +94,11 @@ public class Enemy : Being
     }
 
     private IEnumerator Dead(){
-<<<<<<< Updated upstream
+
         //Instantiate(HealthPotion, transform.position, transform.rotation);
         GetComponent<Animator>().SetTrigger("Dead");
-=======
         animator.SetTrigger("Dead");
->>>>>>> Stashed changes
+
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
     }

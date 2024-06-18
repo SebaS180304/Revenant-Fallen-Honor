@@ -28,7 +28,7 @@ public class Boss : MonoBehaviour
             if(Vector2.Distance(transform.position,objective.position)> MAX_DIST ){
                 animator.SetInteger("State", -1);
             }else{
-                animator.SetInteger("State", -1);
+                animator.SetInteger("State", 1);
             }
         }
         else{

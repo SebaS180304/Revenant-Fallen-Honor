@@ -5,9 +5,10 @@ using UnityEngine;
 public class GetPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
+    private Boss boss;
     void Start()
     {
-        
+        boss = GameObject.Find("Boss").GetComponent<Boss>();
     }
 
     // Update is called once per frame
@@ -17,8 +18,7 @@ public class GetPlayer : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player")){
-            GetComponentInParent<Boss>().setPlayer(other.gameObject);
-            Debug.Log(other.gameObject);
+            boss.setPlayer(other.gameObject);
         }
     }
 }
