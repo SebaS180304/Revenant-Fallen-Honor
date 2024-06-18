@@ -38,9 +38,7 @@ public class Activate : MonoBehaviour
             enemy.SetActive(true);
             enemy.GetComponent<Enemy>().Respawn();
         }
-        foreach(GameObject item in items){
-        item.SetActive(true);
-        }
+       
         boss.GetComponent<Boss>().Reset();
         
     }

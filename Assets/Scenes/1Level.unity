@@ -37112,6 +37112,7 @@ MonoBehaviour:
   hurt: {fileID: 8300000, guid: 4bea60e96c303fb45a2fd8e2e2d3565a, type: 3}
   health: {fileID: 8300000, guid: 832601c79aa085c4b8aba6666738cdfa, type: 3}
   respawn: {fileID: 8300000, guid: 9a61082e0ced0de419675514bc664a55, type: 3}
+  bossMusic: {fileID: 0}
 --- !u!4 &683230004
 Transform:
   m_ObjectHideFlags: 0
@@ -81579,7 +81580,7 @@ MonoBehaviour:
   SwordDMG: 1
   BulletDMG: 3
   Bullet: {fileID: 8243046013734191352, guid: c6bcd72d95257264d91dfa7f33248394, type: 3}
-  coolDown: 2
+  coolDown: 0.5
 --- !u!1 &1419420939
 GameObject:
   m_ObjectHideFlags: 0
@@ -96678,7 +96679,7 @@ MonoBehaviour:
   score: {fileID: 1728964309}
   addedScore: 1000
   DMG: 8
-  HealthPotion: {fileID: 0}
+  HealthPotion: {fileID: 8294470087234605078, guid: e61e6f4c755de0d49abaa5d7510dfbf5, type: 3}
 --- !u!1 &1672247617
 GameObject:
   m_ObjectHideFlags: 0
@@ -101941,6 +101942,10 @@ PrefabInstance:
     - target: {fileID: 4201722072990523859, guid: b5399dc72bbb42d4c8612e4c35103b11, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201722072990523859, guid: b5399dc72bbb42d4c8612e4c35103b11, type: 3}
+      propertyPath: m_TagString
+      value: item
       objectReference: {fileID: 0}
     - target: {fileID: 6203369434581183547, guid: b5399dc72bbb42d4c8612e4c35103b11, type: 3}
       propertyPath: enemy

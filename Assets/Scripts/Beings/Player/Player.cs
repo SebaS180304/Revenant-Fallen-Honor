@@ -109,8 +109,8 @@ public class Player : Being
         else if(dif < 0){
             count = 0;
         }
-        if(count > 5f && stamina < MAX_STAMINA){
-            stamina += 0.5f * Time.deltaTime;
+        if(count > 0.8f && stamina < MAX_STAMINA){
+            stamina += 1.5f * Time.deltaTime;
         }
         
         dStamina = stamina;
@@ -128,6 +128,7 @@ public class Player : Being
         inbulnerable = false;
         animator.SetBool("Dead", false);
         audioManager.PlaySFX(audioManager.respawn);
+        
     }
 
     public void SetInbulnerable(bool state){
