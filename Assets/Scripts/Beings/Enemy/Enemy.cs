@@ -15,8 +15,9 @@ public class Enemy : Being
     private int spawnDist;
     [SerializeField] private int addedScore;
     //Constants
-    private int DMG;
+    [SerializeField] private int DMG;
     private int contactForce;
+    [SerializeField] private GameObject HealthPotion;
 
     void Awake(){
         
@@ -30,7 +31,6 @@ public class Enemy : Being
         inbulnerable = false;
         spawnpoint  = transform.position;
         health  = MAX_HEALTH;
-        DMG = 5;
         contactForce = 25;
 
     }
@@ -44,6 +44,7 @@ public class Enemy : Being
     
     private void OnCollisionStay2D(Collision2D other) {
         try{
+            Debug.Log(other);
             other.gameObject.GetComponent<Player>().GetHit(DMG, transform.position,contactForce );
         }catch(Exception e){
             Debug.Log("Choco");
@@ -96,7 +97,7 @@ public class Enemy : Being
 
     private IEnumerator Dead(){
 
-        //Instantiate(HealthPotion, transform.position, transform.rotation);
+        Instantiate(HealthPotion, transform.position, transform.rotation);
         GetComponent<Animator>().SetTrigger("Dead");
         animator.SetTrigger("Dead");
 

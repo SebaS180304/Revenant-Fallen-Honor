@@ -29,7 +29,9 @@ public class EnemyAttack : MonoBehaviour
     
     private void OnTriggerStay2D(Collider2D other) {
         try{
+            Debug.Log(other.gameObject.GetComponent<Player>());
             other.gameObject.GetComponent<Player>().GetHit(DMG, transform.position, AttackForce);
+            
         }catch(Exception e){
             Debug.Log("NoPlayerFound");
         }

@@ -67,7 +67,6 @@ public class Player : Being
             health -= DMG;
             if (health <= 0)
             {
-                score.AddScore(addedScore);
                 Dead();
             }else{
                 animator.SetTrigger("Hurt");
@@ -96,6 +95,7 @@ public class Player : Being
 
     private void Dead()
     {
+        score.AddScore(addedScore);
         audioManager.PlaySFX(audioManager.death);
         animator.SetBool("Dead", true);
         StartCoroutine(Respawn());
@@ -109,8 +109,8 @@ public class Player : Being
         else if(dif < 0){
             count = 0;
         }
-        if(count > 15f && stamina < MAX_STAMINA){
-            stamina += 0.5f * Time.fixedDeltaTime;
+        if(count > 5f && stamina < MAX_STAMINA){
+            stamina += 0.5f * Time.deltaTime;
         }
         
         dStamina = stamina;
