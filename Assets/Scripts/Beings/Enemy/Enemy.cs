@@ -16,6 +16,8 @@ public class Enemy : Being
     //Constants
     private int DMG;
     private int contactForce;
+
+    private ScoreCountController score;
     
 
     void Awake(){

@@ -16,7 +16,7 @@ public class Controls : MonoBehaviour
     private bool firing; // Inter Value
 
     //States
-    private bool rightF;
+    public bool rightF;
     
     public bool CanMove;
 
@@ -27,6 +27,9 @@ public class Controls : MonoBehaviour
     private Animator animator;
     private Rigidbody2D RB2D;
     private Attacks attacks;
+    [SerializeField] private GameObject _cameraFollowGO;
+    private CameraFollowObject _cameraFollowObject;
+    private float _fallSpeedYDampingChangeThreshold;
 
     private void Awake() {
         position = GetComponent<Transform>();
@@ -34,6 +37,7 @@ public class Controls : MonoBehaviour
         attacks = GetComponentInChildren<Attacks>();
         animator = GetComponent<Animator>();
         RB2D = GetComponent<Rigidbody2D>();   
+        _cameraFollowObject = _cameraFollowGO.GetComponent<CameraFollowObject>();
     }
 
     void Start()
@@ -42,6 +46,7 @@ public class Controls : MonoBehaviour
         jump = false;
         rightF = true;
         CanMove = true;
+        _fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
     }
 
 
@@ -64,6 +69,16 @@ public class Controls : MonoBehaviour
             }
             else {
                 xMov = 0f;
+            }
+
+            if (RB2D.velocity.y < _fallSpeedYDampingChangeThreshold && !CameraManager.instance.isLerpingYDamping &&  !CameraManager.instance.LerpedFromPlayerFalling){
+                CameraManager.instance.LerpYDamping(true);
+            }
+            if (RB2D.velocity.y >= 0f && !CameraManager.instance.isLerpingYDamping && CameraManager.instance.LerpedFromPlayerFalling)
+            {
+                CameraManager.instance.LerpedFromPlayerFalling = false;
+
+                CameraManager.instance.LerpYDamping(false);
             }
         }
     }
@@ -88,10 +103,14 @@ public class Controls : MonoBehaviour
             if(rightF && xMov < 0){
                 position.Rotate(0f,180f,0f);
                 rightF = false;
+
+                _cameraFollowObject.CallTurn();
             }
             if(!rightF && xMov > 0){
                 position.Rotate(0f,180f,0f);
                 rightF = true;
+
+                _cameraFollowObject.CallTurn();
             }
         }
         else

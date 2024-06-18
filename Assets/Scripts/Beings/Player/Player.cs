@@ -30,7 +30,7 @@ public class Player : Being
     private Rigidbody2D RB2D;
     private Controls control;
     private Animator animator;
-
+    private ScoreCountController score;
 
     //Evento
     public event EventHandler onDead;
