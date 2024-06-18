@@ -49,9 +49,6 @@ public class Attacks : MonoBehaviour
                 if(object_.CompareTag("Enemy")&& !object_.isTrigger){
                     audioManager.PlaySFX(audioManager.hitting);
                     object_.GetComponent<Enemy>().GetHit(SwordDMG, attackPosition.position);
-                }else if(object_.CompareTag("Boss")&& !object_.isTrigger){
-                    audioManager.PlaySFX(audioManager.hitting);
-                    object_.GetComponent<Enemy>().GetHit(SwordDMG, attackPosition.position, 5);
                 }
             }
             StartCoroutine(BulletAttack(fire));

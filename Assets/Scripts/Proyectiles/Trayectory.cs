@@ -53,7 +53,6 @@ public class Trayectory : MonoBehaviour
     private IEnumerator AutoDestruction(){
         yield return new WaitForSeconds(5f);
         Destroy(gameObject);
-        Instantiate(explosssion, transfrom.position, transfrom.rotation);
     }
 
 }

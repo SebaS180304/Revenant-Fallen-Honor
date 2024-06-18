@@ -7,7 +7,8 @@ TagManager:
   - Enemy
   - Audio
   - item
-  - Boss
+  - Mana
+  - Health
   layers:
   - Default
   - TransparentFX
