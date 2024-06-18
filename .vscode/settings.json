@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Revenant Fallen Honor.sln"
+    "dotnet.defaultSolution": "Revenant-Fallen-Honor.sln"
 }
