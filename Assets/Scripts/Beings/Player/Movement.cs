@@ -60,8 +60,8 @@ public class Movement : MonoBehaviour
         CanJump = IG;
     }
 
-    public void Dash(bool move){
-        if(CanJump && move && playerST.stamina > 0.1){
+    public void Dash(bool move , float xMov){
+        if(CanJump && move && playerST.stamina > 0.1 && xMov!=0){
             dash = 1.8f;
             GetComponent<Animator>().SetBool("Dashing", true);
             playerST.stamina -= 0.1f;

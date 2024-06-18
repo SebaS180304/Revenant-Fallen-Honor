@@ -49,11 +49,19 @@ public class Controls : MonoBehaviour
         if (!PauseMenu.isPaused){ 
             if (CanMove)
             {
+<<<<<<< Updated upstream
                 attacking = Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.JoystickButton7);
                 firing = Input.GetKey(KeyCode.Mouse1) || Input.GetKey(KeyCode.JoystickButton6);
                 dashing = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.JoystickButton1);
                 xMov = Input.GetAxisRaw("Horizontal");
                 yMov = (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton0)) ;
+=======
+                attacking = Input.GetKey(KeyCode.Mouse0)|| Input.GetKey(KeyCode.JoystickButton5);
+                firing = Input.GetKey(KeyCode.Mouse1) || Input.GetKey(KeyCode.JoystickButton4);
+                dashing = Input.GetKey(KeyCode.LeftShift) ||  Input.GetKey(KeyCode.JoystickButton1);
+                xMov = Input.GetAxisRaw("Horizontal");
+                yMov = Input.GetKey(KeyCode.Space) ||Input.GetKey(KeyCode.JoystickButton0);
+>>>>>>> Stashed changes
                 //Al ser el tipo get keydown, y el update es mas rapido que el fixedUp, hace que reciba el input, pero no haga la accion al instante
                 //Por eso es que tiene que tener variebles intermedias
                 jump = yMov ? true : jump;
@@ -68,7 +76,7 @@ public class Controls : MonoBehaviour
     }
 
     private void FixedUpdate() {
-            movement.Dash(dashing);
+            movement.Dash(dashing, xMov);
             movement.Walk(xMov * Time.fixedDeltaTime);
             movement.Jump(jump);
             attacks.SwordAttack(attack,fire);
