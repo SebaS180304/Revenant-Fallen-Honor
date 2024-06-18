@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip hurt;
     public AudioClip health;
     public AudioClip respawn;
+    public AudioClip bossMusic;
 
     private void Start(){
         musicSource.clip = mainMusic;
