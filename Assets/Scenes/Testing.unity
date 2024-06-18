@@ -500,10 +500,6 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6473997839460275759, guid: 654dc39b11d4dbe47be92417ddfda975, type: 3}
-      propertyPath: SwordDMG
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6473997839460275759, guid: 654dc39b11d4dbe47be92417ddfda975, type: 3}
       propertyPath: BulletDMG
       value: 6
       objectReference: {fileID: 0}
